@@ -1,0 +1,24 @@
+server:
+  port: 8081
+  
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/  
+  
+---
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: nt-ms1
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/rest2/**
+        - id: nt-ms2
+          uri: http://localhost:8090/
+          predicates:
+            - Path=/rest1/**
+        
